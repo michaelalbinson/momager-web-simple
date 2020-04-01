@@ -1,0 +1,8 @@
+{
+  "database": "mc-test",
+  "host": "localhost",
+  "user": "root",
+  "secret": "",
+  "max-connections": "50",
+  "dbName": "mc-test"
+}

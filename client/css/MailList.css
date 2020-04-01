@@ -1,0 +1,24 @@
+div.mail-list {
+    background-color: var(--light-background-color);
+    color: var(--opposing-text-theme-color);
+    height: 45%;
+    overflow: scroll;
+}
+
+div.mail-list a {
+    color: var(--opposing-text-theme-color);
+}
+
+div.mail-list div.row,
+div.mail-list div.row a {
+    width: 100%;
+    text-align: left;
+}
+
+div.email-item {
+    border-bottom: solid var(--opposing-text-theme-color) 1px;
+}
+
+div.email-item div {
+    display: inline-block;
+}

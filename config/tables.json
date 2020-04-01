@@ -1,0 +1,9 @@
+{
+  "Session": "",
+  "User": "",
+  "Password_Reset": "",
+  "Verification_Key": "",
+  "Weather_Cache": "",
+  "__comment": "etc... add as we add the functionality",
+  "__comment2": "reminder that this must be updated in parallel to the hp-core code at the moment"
+}

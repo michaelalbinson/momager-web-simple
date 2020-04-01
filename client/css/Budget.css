@@ -1,0 +1,38 @@
+.add-category select {
+    width: 25%;
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.tighten-body {
+    width: 60%;
+    margin: 0 20%;
+}
+
+.tighten-body .hero {
+    margin-bottom: 2rem;
+}
+
+.budget-landing .card {
+    color: var(--opposing-text-theme-color);
+}
+
+.budget-landing p {
+    font-size: 1.25rem;
+}
+
+.budget-landing .card p:first-child {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.budget-landing .card a {
+    width: 45%;
+    margin: 0 27.5% 0.25rem 27.5%;
+}
+
+.budget-dash .card {
+    width: 48%;
+    margin: 0 1%;
+    color: var(--opposing-text-theme-color);
+}

@@ -1,0 +1,120 @@
+-- ---
+-- Table 'User'
+--
+-- ---
+
+DROP TABLE IF EXISTS `User`;
+
+CREATE TABLE `User` (
+  `id` VARCHAR(32) NOT NULL,
+  `FNAME` VARCHAR(50) NOT NULL,
+  `LNAME` VARCHAR(50) NOT NULL,
+  `EMAIL` VARCHAR(100) NOT NULL UNIQUE,
+  `DATE_OF_BIRTH` DATE NULL DEFAULT NULL,
+  `ADDRESS` VARCHAR(1000) NULL DEFAULT NULL,
+  `PASSWORD` VARCHAR(200) NOT NULL,
+  `SALT` VARCHAR(50) NOT NULL,
+  `VERIFIED` BOOLEAN DEFAULT false,
+  `USER_SETTINGS` VARCHAR(500) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Momager_Email'
+--
+-- ---
+
+DROP TABLE IF EXISTS `Momager_Email`;
+
+CREATE TABLE `Momager_Email` (
+    `id` VARCHAR(32) NOT NULL,
+    `USER_ID` VARCHAR(32) NULL DEFAULT NULL,
+    `ADDRESS` VARCHAR(100) NOT NULL UNIQUE,
+    `INTERNAL_PASSWORD` VARCHAR(50) NOT NULL UNIQUE,
+    PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Email'
+--
+-- ---
+
+DROP TABLE IF EXISTS `Email`;
+
+CREATE TABLE `Email` (
+    `id` VARCHAR(32) NOT NULL,
+    `BODY` VARCHAR(500) DEFAULT NULL,
+    `TO_EMAIL` VARCHAR(100) NOT NULL UNIQUE,
+    `FROM_EMAIL` VARCHAR(100) NOT NULL UNIQUE,
+    PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Password_Reset'
+--
+-- ---
+
+DROP TABLE IF EXISTS `Password_Reset`;
+
+CREATE TABLE `Password_Reset` (
+  `id` VARCHAR(32) NOT NULL,
+  `USER_ID` VARCHAR(32) NULL DEFAULT NULL,
+  `REQ_DATE` DATETIME NULL DEFAULT NULL,
+  `EMAIL_STR` VARCHAR(32) NULL DEFAULT NULL,
+  `CODE` VARCHAR(6) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Session'
+--
+-- ---
+
+DROP TABLE IF EXISTS `Session`;
+
+CREATE TABLE `Session` (
+  `id` VARCHAR(32) NOT NULL,
+  `USER_ID` VARCHAR(32) NOT NULL,
+  `EXPIRES` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table `Verification_Key`
+--
+-- ---
+
+DROP TABLE IF EXISTS `Verification_Key`;
+
+CREATE TABLE `Verification_Key` (
+  `id` VARCHAR(32) NOT NULL,
+  `USER_ID` VARCHAR(32) NOT NULL,
+  `USER_KEY` VARCHAR(32) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table `Weather_Cache`
+--
+-- ---
+
+DROP TABLE IF EXISTS `Weather_Cache`;
+
+CREATE TABLE `Weather_Cache` (
+  `id` VARCHAR(32) NOT NULL,
+  `CITY` VARCHAR(100) NOT NULL,
+  `STATE` VARCHAR(100) NOT NULL,
+  `LAT` VARCHAR(100) NOT NULL,
+  `LON` VARCHAR(100) NOT NULL,
+  `DATA` MEDIUMTEXT NOT NULL,
+  `DATE` TIMESTAMP NOT NULL DEFAULT NOW(),
+  UNIQUE (LAT, LON),
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Foreign Keys
+-- ---
+ALTER TABLE `Password_Reset` ADD FOREIGN KEY (USER_ID) REFERENCES `User` (`id`);
+ALTER TABLE `Session` ADD FOREIGN KEY (USER_ID) REFERENCES `User` (`id`);
+ALTER TABLE `Verification_Key` ADD FOREIGN KEY (USER_ID) REFERENCES `User` (`id`);

@@ -1,0 +1,5 @@
+{
+  "defaultTable1": "CREATE TABLE `tab1` (`id` varchar(32) NOT NULL PRIMARY KEY, col1t1 INTEGER NOT NULL, col2t1 varchar(1) NOT NULL);",
+  "defaultTable2": "CREATE TABLE `tab2` (`id` varchar(32) NOT NULL PRIMARY KEY, col1t2 INTEGER DEFAULT NULL, col2t2 varchar(1) DEFAULT NULL);",
+  "defaultTable3": "CREATE TABLE `tab3` (`id` varchar(32) NOT NULL PRIMARY KEY, col1t3 varchar(1) DEFAULT 'a');"
+}

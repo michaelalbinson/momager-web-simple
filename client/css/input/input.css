@@ -1,0 +1,82 @@
+input {
+    line-height: 1rem;
+    width: calc(100% - 1rem);
+    border: none;
+    margin-bottom: 2px;
+    border-bottom: solid var(--text-theme-color) 2px;
+    color: var(--text-theme-color);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+input::placeholder {
+    color: var(--text-theme-color);
+    opacity: 0.5;
+}
+
+input.distinct,
+form.distinct input {
+    margin-bottom: 0;
+    border-bottom: solid var(--text-theme-color) 2px;
+    width: inherit;
+}
+
+input:focus,
+input.distinct:focus,
+form.distinct input:focus {
+    border-bottom: solid var(--warm-theme) 2px;
+    transition: 0.1s ease-in-out;
+    margin-bottom: 0;
+}
+
+textarea {
+    width: 98%;
+    margin: 0.5rem 1% 0 1%;
+    min-height: 5rem;
+    padding-bottom: 3px;
+    resize: none;
+    border: none;
+}
+
+textarea:focus {
+    padding-bottom: 0;
+    border-bottom: solid var(--warm-theme) 3px;
+    transition: 0.1s ease-in-out;
+}
+
+input[type=text].search-bar {
+    font-size: 2rem;
+    width: 50%;
+    margin-bottom: 1rem;
+}
+
+
+/* For two inputs to share a line */
+.split-line label {
+    display: none;
+}
+
+.split-line input {
+    display: inline-block;
+    width: calc(40% - 6px) !important;
+}
+
+.split-line {
+    width: calc(40% - 6px);
+    padding: 0;
+}
+
+.split-line:nth-child(odd) {
+    text-align: right;
+}
+
+.split-line:nth-child(odd) input {
+    margin-right: -3px;
+}
+
+.split-line:nth-child(even) {
+    text-align: left;
+}
+
+.split-line:nth-child(even) input {
+    margin-left: 3px;
+}

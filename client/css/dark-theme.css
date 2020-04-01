@@ -1,0 +1,10 @@
+/* Dark Theme */
+:root {
+    --theme-color: black !important;
+    --text-theme-color: #a6a6a6 !important;
+    --light-background-color: #666 !important;
+    --hr-only-color: rgba(255,255,255,.1) !important;
+    --opposing-text-theme-color: black !important;
+    --invert: 0.7 !important;
+    --warm-theme: #c77632;
+}

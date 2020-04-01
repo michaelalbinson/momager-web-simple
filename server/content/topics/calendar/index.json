@@ -1,0 +1,8 @@
+{
+    "icon": "calendar.png",
+    "iconDescription": "Calendar on a white background",
+    "title": "Your Calendar",
+    "subtitle": "Everything you need to know about cars",
+    "special": true,
+    "render": "calendar"
+}

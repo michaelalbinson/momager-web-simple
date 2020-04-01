@@ -1,0 +1,132 @@
+/* Normal Theme */
+:root {
+    --theme-color: #3FC8FE;
+    --darker-theme-color: #1d43b0;
+    --text-theme-color: white;
+    --light-background-color: white;
+    --hr-only-color: rgba(0,0,0,.1);
+    --opposing-text-theme-color: black;
+    --warm-theme: blue;
+    --invert: 0;
+}
+
+
+@font-face {
+    font-family: 'Monserrat';
+    src: URL('./Montserrat/Montserrat-Regular.ttf') format('truetype');
+}
+
+body {
+    -webkit-app-region: drag;
+
+    padding-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+    background-color: var(--theme-color);
+    color: var(--text-theme-color);
+    text-align: center;
+
+    width: calc(100vw - 50px);
+    height: 100vh;
+
+    font-family: Monserrat, serif;
+}
+
+hr {
+    border-color: var(--hr-only-color);
+}
+
+.app-contents {
+    -webkit-app-region: no-drag;
+}
+
+.centered {
+    text-align: center;
+}
+
+.row {
+    margin: 0;
+}
+
+.back-logo {
+    filter: invert(var(--invert));
+}
+
+#App {
+    width: 100%;
+}
+
+button, a {
+    -webkit-app-region: no-drag;
+}
+
+img.tile {
+    max-height: 150px;
+    max-width: 180px;
+    padding: 10px 10px;
+    margin: auto;
+}
+
+div.tile-card {
+    background-color: var(--light-background-color);
+    min-height: 200px;
+    width: 200px;
+    color: var(--opposing-text-theme-color);
+    margin: 10px auto;
+}
+
+div.tile-card h4 {
+    line-height: 50px;
+}
+
+.hero {
+    height: 25vh;
+}
+
+a {
+    color: var(--text-theme-color);
+}
+
+a:hover {
+    color: var(--text-theme-color);
+}
+
+.back {
+    position: fixed;
+    top: 30px;
+    left: 10px;
+}
+
+.back img,
+.settings img,
+.weather-liner img {
+    width: 25px;
+}
+
+.weather-liner img {
+    filter: invert(100%);
+}
+
+.settings {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+}
+
+.out-of-flow-right {
+    position: absolute;
+    top: 30px;
+    right: 25px;
+}
+
+p.form-error {
+    color: darkred;
+}
+
+.invert-in-dark-mode {
+    filter: invert(1);
+}
+
+.white-bg {
+    background-color: white;
+}

@@ -1,0 +1,41 @@
+{
+  "name": "momager-web",
+  "version": "1.0.0",
+  "description": "The data endpoint for HeadPulse applications",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.16.4",
+    "express-handlebars": "^4.0.0",
+    "helmet": "^3.22.0",
+    "mysql": "^2.16.0",
+    "nodemailer": "^4.7.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "nyc": "^15.0.0",
+    "sinon": "^5.1.1",
+    "sinon-chai": "^3.3.0"
+  },
+  "scripts": {
+    "test": "mocha --recursive",
+    "test-coverage": "nyc --reporter=html mocha --recursive",
+    "start": "node app.js",
+    "reload-core": "node tool/setup.js",
+    "load-mock-data": "node tool/zz_load-mock-data.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelalbinson/headpulse-data-endpoint.git"
+  },
+  "author": "Michael Albinson",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/michaelalbinson/headpulse-data-endpoint/issues"
+  },
+  "homepage": "https://github.com/michaelalbinson/headpulse-data-endpoint#readme"
+}

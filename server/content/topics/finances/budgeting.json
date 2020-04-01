@@ -1,0 +1,9 @@
+{
+  "title": "Budgeting",
+  "subtitle": "",
+  "icon": "budgeting.png",
+  "iconDescription": "Piggy bank on a white back ground",
+  "body": "Some helpful information...",
+  "special": true,
+  "render": "budgeting"
+}

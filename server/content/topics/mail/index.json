@@ -1,0 +1,8 @@
+{
+    "icon": "email.png",
+    "iconDescription": "Letter on a white background",
+    "title": "Mail",
+    "subtitle": "Everything you need to know about cars",
+    "special": true,
+    "render": "mail"
+}

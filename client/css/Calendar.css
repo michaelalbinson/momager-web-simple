@@ -1,0 +1,158 @@
+.calendar {
+    width: 100%;
+}
+
+.week-topline {
+    background-color: blue;
+}
+
+.week-topline > div,
+.week > div {
+    display: inline-block;
+    border: 1px solid black;
+    width: calc(100%/7);
+    border-collapse: collapse;
+
+}
+
+.week {
+    height: calc((80vh) /6);
+    background-color: rgba(250, 240, 230, 0.3);
+}
+
+.week > div {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+div.day {
+    border-collapse: collapse;
+    height: calc((80vh) /6);
+}
+
+div.week div.day-number {
+    border: none;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.25rem;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+div.week div.day:first-child {
+    background-color: #0c5460;
+}
+
+div.week div.day:last-child {
+    background-color: #0c5460;
+}
+
+div.date-today > div.day-number {
+    background-color: red;
+    border-radius: 1.5rem;
+}
+
+div.event:first-child {
+    margin-top: 1.75rem;
+}
+
+div.event {
+    position: absolute;
+    width: 100%;
+    text-overflow: ellipsis;
+    border: none;
+    font-size: 0.75rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+}
+
+div.event::first-letter {
+    padding-left: 5%;
+}
+
+div.event-red {
+    background-color: darkred;
+}
+
+div.date-grayed > div.day-number,
+td.date-grayed button {
+    color: #b7b7b7;
+}
+
+.calendar-control {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+}
+
+.calendar-control .btn-group {
+    display: inline-block;
+}
+
+img.calendar-weather-icon {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 0;
+    left: 5px;
+    filter: invert(1);
+}
+
+#weekView .day,
+#weekView .week {
+    height: 80vh;
+}
+
+span.today {
+    color: red;
+}
+
+.weather-section {
+    text-align: left;
+}
+
+.weather-icon {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+}
+
+/* DatePicker */
+table.date-picker td,
+table.date-picker th {
+    size: 0.7rem;
+}
+
+table.date-picker td {
+    width: 2rem;
+    border-radius: 2rem;
+}
+
+table.date-picker button {
+    background-color: rgba(0,0,0,0);
+    border-radius: 2rem;
+    border: none;
+    outline: none;
+    padding: 0;
+    width: 100%;
+}
+
+table.date-picker button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+table.date-picker td.date-today button {
+    color: red;
+}
+
+table.date-picker td.selected.date-today button {
+    background-color: red;
+    color: var(--opposing-text-theme-color);
+}
+
+table.date-picker td.selected {
+    background-color: var(--light-background-color);
+    color: var(--opposing-text-theme-color);
+}

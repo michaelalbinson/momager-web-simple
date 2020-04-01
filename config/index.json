@@ -1,0 +1,13 @@
+{
+  "host": 5555,
+  "WEATHER-API-KEY": "89f523ca9212beeefaeef9f36388b3cf",
+  "privateKey": "j2juvdjpxkbh9wejt39ygehzjyjesj1f7lcgdxdpjwq802vn7l0govux0pl5voaj",
+  "mailer": {
+    "host": "",
+    "port": 544,
+    "user": "",
+    "password": "",
+    "address": "",
+    "allow-sending": false
+  }
+}

@@ -1,0 +1,8 @@
+{
+    "icon": "bell.png",
+    "iconDescription": "Bell on a white background",
+    "title": "Notifications",
+    "subtitle": "",
+    "special": true,
+    "render": "notifications"
+}

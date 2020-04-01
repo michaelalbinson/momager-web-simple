@@ -1,0 +1,24 @@
+button.btn-primary {
+    /*background-color: var(--darker-theme-color);*/
+    /*border-color: var(--darker-theme-color);*/
+    color: #fff;
+}
+
+button.btn-primary:hover {
+    /*background-color: var(--darker-theme-color);*/
+    /*border-color: var(--darker-theme-color);*/
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    /*background-color: var(--bgf-theme-color);*/
+    /*border-color: var(--bgf-theme-color);*/
+}
+
+/*.btn.btn-link {*/
+/*    color: var(--bgf-theme-color);*/
+/*}*/
+
+/*.btn.btn-link:hover {*/
+/*    color: var(--bgf-darker-theme);*/
+/*}*/

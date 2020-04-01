@@ -1,0 +1,20 @@
+div {
+    font-style: italic;
+    display: inline-block;
+    font-family: monospace, monospace;
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
+}
+
+div.focused {
+    color: var(--bgf-darker-theme);
+}
+
+div.next-line {
+    display: block;
+    text-align: right;
+}
+
+div.above {
+    color: red;
+}

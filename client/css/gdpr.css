@@ -1,0 +1,49 @@
+/*
+//  gdpr.css
+//  AmpU Advisor Management
+//
+//  Created by Michael Albinson on 2019-07-06.
+//  Copyright © 2019 AmpU Advisor Management. All rights reserved.
+*/
+
+.gdpr-privacy-statement {
+    background-color: var(--theme-color);
+    color: var(--text-theme-color);
+
+    position: fixed;
+
+    padding: 10px;
+
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+
+    box-shadow: 2px 2px 10px black;
+}
+
+.gdpr-privacy-statement button.accept {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.gdpr-privacy-statement button.close {
+    color: white;
+    opacity: 1;
+}
+
+.gdpr-privacy-statement .foot {
+    height: 3rem;
+}
+
+.gdpr-privacy-statement .head {
+    height: 30px;
+}
+
+.gdpr-privacy-statement a {
+    color: var(--bgf-lighter-theme);
+}
+
+.gdpr-privacy-statement a:hover {
+    color: white;
+}

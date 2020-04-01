@@ -1,0 +1,7 @@
+{
+  "title": "Article Title",
+  "subtitle": "Optional Article Subtitle",
+  "icon": "icon to use for the article placed at /client/assets/topic/",
+  "iconDescription": "description for the icon",
+  "body": "html or plain-text article body"
+}

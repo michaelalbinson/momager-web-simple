@@ -6,7 +6,7 @@ class WeatherLookup {
         return new Promise(((resolve, reject) => {
             const weatherData = WeatherLookup.getWeatherCache();
             // if we have a weatherData object and the weather data is not stale (< 3hrs old), return it
-            if (typeof weatherData === 'object' && weatherData.date !== '' && moment(weatherData.date).add(1, 'hours').isAfter(moment(), 'hour'))
+            if (typeof weatherData === 'object' && weatherData.date !== '' && new Date(weatherData.date).addHours(3) > new Date())
                 return resolve(weatherData);
 
             WeatherLookup.fetchWeather().then((retrievedData) => {
@@ -28,22 +28,19 @@ class WeatherLookup {
         let city = null;
         let state = null;
         let IP = null;
-        return WeatherLookup.fetchIP().then((result) => {
-            LAT = result.latitude;
-            LON = result.longitude;
-            city = result.city;
-            state = result.region_code;
-            IP = result.ip;
+        return WeatherLookup.getGeoLocation().then((position) => {
+            LAT = position.coords.latitude;
+            LON = position.coords.longitude;
 
-            const call = new APICall(APICall.Reg.WEATHER, { LAT, LON, city, state, IP });
-            return call.GET();
+            return requestPromise('/plumbing/weather', { LAT, LON }, request.METHODS.GET);
         }).then((weatherJSON) => {
-            let objectifiedData = {};
+            let objectifiedData;
             try {
                 objectifiedData = JSON.parse(weatherJSON.data);
             } catch (e) {
                 objectifiedData = weatherJSON.data;
             }
+
             const weatherData = {
                 latitude: LAT,
                 longitude: LON,
@@ -51,56 +48,47 @@ class WeatherLookup {
                 IP,
                 '5-day': objectifiedData.daily.data,
                 current: objectifiedData.currently,
-                date: moment().format(),
+                date: new Date(),
             };
 
             WeatherLookup.writeWeatherCache(weatherData);
             return weatherData;
+        }).catch((err) => {
+            console.error('Unable to retrieve weather data:');
+            console.error(err);
         });
     }
 
-    static fetchIP() {
-        const ipCache = WeatherLookup.getIPCache();
-        if (ipCache && ipCache.date &&
-            moment(ipCache.date).add(6, 'hours').isAfter(moment(), 'hour')) return Promise.resolve(ipCache.data);
+    static getGeoLocation() {
+        return new Promise((resolve, reject) => {
+            if (!navigator.geolocation)
+                return reject('Geolocation is not available');
 
-        console.log('FETCH TO IP API');
-        return fetch('https://api.ipify.org').then((response) => {
-            if (!response.ok)
-                throw new Error('');
-
-            return response.text();
-        }).then((result) => {
-            const ipData = {
-                data: result,
-                date: moment().format(),
-            };
-
-            WeatherLookup.writeIPCache(ipData);
-
-            return ipData.data;
+            navigator.geolocation.getCurrentPosition((position) => {
+                resolve(position);
+            }, () => {
+                reject('Geolocation is not available');
+            });
         });
     }
 
     static getWeatherCache() {
-        const store = ColdStorage.getStore();
+        const store = new ColdStorage();
         return store.get(ColdStorage.sections.weather);
     }
 
     static getIPCache() {
-        const store = ColdStorage.getStore();
+        const store = new ColdStorage();
         return store.get(ColdStorage.sections.IP);
     }
 
     static writeIPCache(data) {
-        const store = ColdStorage.getStore();
+        const store = new ColdStorage();
         return store.set(ColdStorage.sections.IP, data);
     }
 
     static writeWeatherCache(data) {
-        const store = ColdStorage.getStore();
-        store.set('weather', data);
+        const store = new ColdStorage();
+        store.set(ColdStorage.sections.weather, data);
     }
 }
-
-export default WeatherLookup;

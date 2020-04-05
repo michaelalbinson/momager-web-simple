@@ -8,8 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="/assets/favicon.png" rel="icon" type="image/x-icon">
 
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap4.css">
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/alb-css/bootstrap4.css">
+        <link rel="stylesheet" type="text/css" href="/css/index.css">
         {{#if styles}}
             {{#each styles}}
                 <link rel="stylesheet" type="text/css" href="/css/{{this}}">
@@ -17,31 +17,35 @@
         {{/if}}
         <link rel="stylesheet" type="text/css" href="/css/gdpr.css">
 
-        <script type="text/javascript" src="/js/util/request.js"></script>
-        <script type="text/javascript" src="/js/util/ElementFactory.js"></script>
+        <script type="text/javascript" src="/alb-js/util/shim.js"></script>
+        <script type="text/javascript" src="/js/spec/util/ColdStorage.js"></script>
+        <script type="text/javascript" src="/alb-js/util/request.js"></script>
+        <script type="text/javascript" src="/alb-js/util/ElementFactory.js"></script>
 
-        <script type="text/javascript" src="/js/base/base-dom.js"></script>
-        <script type="text/javascript" src="/js/modal/modal.js"></script>
-        <script type="text/javascript" src="/js/modal/error-modal.js"></script>
-        <script type="text/javascript" src="/js/modal/warning-modal.js"></script>
-        <script type="text/javascript" src="/js/modal/success-modal.js"></script>
+        <script type="text/javascript" src="/alb-js/base/base-dom.js"></script>
+        <script type="text/javascript" src="/alb-js/base/icon-link.js"></script>
+        <script type="text/javascript" src="/alb-js/modal/modal.js"></script>
+        <script type="text/javascript" src="/alb-js/modal/error-modal.js"></script>
+        <script type="text/javascript" src="/alb-js/modal/warning-modal.js"></script>
+        <script type="text/javascript" src="/alb-js/modal/success-modal.js"></script>
 
         {{#if scripts}}
             {{#each scripts}}
                 <script type="text/javascript" src="/js/{{this}}"></script>
             {{/each}}
         {{/if}}
-        <script type="text/javascript" src="/js/base/app-header.js"></script>
-        <script type="text/javascript" src="/js/base/app-footer.js"></script>
-        <script type="text/javascript" src="/js/base/app-page.js"></script>
+        <script type="text/javascript" src="/alb-js/base/app-header.js"></script>
+        <script type="text/javascript" src="/alb-js/base/app-footer.js"></script>
+        <script type="text/javascript" src="/alb-js/base/app-page.js"></script>
+        <script type="text/javascript" src="/js/mom-page.js"></script>
 
-        <script src="/js/util/cookie-listener.js"></script>
+        <script src="/alb-js/util/cookie-listener.js"></script>
     </head>
     <body>
-        <app-page>
+        <mom-page>
             <div slot='content'>
                 {{{body}}}
             </div>
-        </app-page>
+        </mom-page>
     </body>
 </html>

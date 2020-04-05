@@ -1,9 +1,12 @@
-let mysql = require('mysql');
-const config = require('../config/dbConfig.json');
-let fs = require('fs');
-let path = require('path');
+'use strict';
 
-const load_core = fs.readFileSync(path.join(__dirname, 'config', 'mgr-core.sql')).toString();
+
+const mysql = require('mysql');
+const config = require('../config/dbConfig.json');
+const fs = require('fs');
+const path = require('path');
+
+const load_core = fs.readFileSync(path.join(__dirname, '..', 'config', 'mgr-core.sql')).toString();
 
 const opts = {
     host: config.host,

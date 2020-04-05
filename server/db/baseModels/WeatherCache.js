@@ -13,59 +13,51 @@ function WeatherCache() {
     const table = "Weather_Cache";
 
     this.create = function(city, state, lat, lon, data) {
-        return new Promise(function(resolve, reject) {
-            const id = self.generate();
-            const date = new Date();
-            const stringified = JSON.stringify(data);
-            const escaped = self.escapeAll({ id, city, state, lat, lon, stringified, date });
+        const id = self.generate();
+        const date = new Date();
+        const stringified = JSON.stringify(data);
+        const escaped = self.escapeAll({ id, city, state, lat, lon, stringified, date });
 
-            const CREATE =
-                `INSERT INTO ${table} (id, city, state, lat, lon, data, date) VALUES 
-                (${escaped.id}, ${escaped.city}, ${escaped.state}, ${escaped.lat}, ${escaped.lon}, 
-                ${escaped.stringified}, ${escaped.date})`;
+        const CREATE =
+            `INSERT INTO ${table} (id, city, state, lat, lon, data, date) VALUES 
+            (${escaped.id}, ${escaped.city}, ${escaped.state}, ${escaped.lat}, ${escaped.lon}, 
+            ${escaped.stringified}, ${escaped.date})`;
 
-            self.db.query(CREATE).then(function() {
-                self._setInternalValues({id, city, state, lat, lon, data, date});
-                resolve();
-            }).catch(function(err) {
-                reject(new MCError('Unable to CREATE session.', 'INT', err));
-            });
+        return self.db.query(CREATE).then(() => {
+            self._setInternalValues({id, city, state, lat, lon, data, date});
+        }).catch((err) => {
+            return Promise.reject(new MCError('Unable to CREATE session.', 'INT', err));
         });
     };
 
     this.query = function(opts) {
         const ONE_HOUR = 1000*60*60;
-        return new Promise(function(resolve, reject) {
-            let q;
-            if (opts.lat && opts.lon) {
-                q = `SELECT * FROM ${table} WHERE LAT=${opts.lat} AND LON=${opts.lon}`
-            } else if (opts.city && opts.state) {
-                q = `SELECT * FROM ${table} WHERE CITY=${opts.city} AND STATE=${opts.state}`
-            } else {
-                return reject('NO DATA TO SEARCH WITH');
+        opts.lon = toFiveSigFigs(opts.lat);
+        opts.lat = toFiveSigFigs(opts.lon);
+
+        let q;
+        if (opts.lat && opts.lon)
+            q = `SELECT * FROM ${table} WHERE LAT=${opts.lat} AND LON=${opts.lon}`;
+        else if (opts.city && opts.state)
+            q = `SELECT * FROM ${table} WHERE CITY=${opts.city} AND STATE=${opts.state}`;
+        else
+            return Promise.reject('NO DATA TO SEARCH WITH');
+
+        return self.db.query(q).then((rows) => {
+            // if we didn't get a result but have the lat/lon
+            // get the weather data, cache it and return it
+            if (rows.length < 1 && opts.lat && opts.lon)
+                return createNewCache(opts);
+
+            // if more than 3 hours have passed and the cache is requested, refresh the cache
+            if (Math.abs(rows[0].DATE - new Date()) > ONE_HOUR) {
+                self.id = rows[0].id;
+                return self.delete(rows[0].id).then(() => createNewCache(opts));
             }
 
-            self.db.query(q).then(function(rows) {
-                // if we didn't get a result but have the lat/lon
-                // get the weather data, cache it and return it
-                if (rows.length < 1 && opts.lat && opts.lon) {
-                    createNewCache(opts).then(resolve).catch(reject);
-                    return;
-                }
-
-                // if more than 3 hours have passed and the cache is requested, refresh the cache
-                if (Math.abs(rows[0].DATE - new Date()) > ONE_HOUR) {
-                    self.id = rows[0].id;
-                    self.delete(rows[0].id).then(() => createNewCache(opts))
-                        .then(resolve).catch(reject);
-                    return;
-                }
-
-                self._setInternalValues(rows[0]);
-                resolve();
-            }).catch(function(err) {
-                reject(new MCError("Internal error executing session query", "INT", err));
-            });
+            self._setInternalValues(rows[0]);
+        }).catch((err) => {
+            return Promise.reject(new MCError("Internal error executing session query", "INT", err));
         });
     };
 
@@ -96,14 +88,8 @@ function WeatherCache() {
     };
 
     function createNewCache(opts) {
-        return new Promise((resolve, reject) => {
-            getWeatherData(opts.lat, opts.lon).then((data) => {
-                return self.create(opts.city, opts.state, opts.lat, opts.lon, data);
-            }).then(() => {
-                resolve();
-            }).catch((err) => {
-                reject(err);
-            });
+        return getWeatherData(opts.lat, opts.lon).then((data) => {
+            return self.create(opts.city, opts.state, opts.lat, opts.lon, data);
         });
     }
 
@@ -123,6 +109,14 @@ function WeatherCache() {
                 resolve(data);
             });
         });
+    }
+
+    function toFiveSigFigs(coord) {
+        const splitCoord = coord.split('.');
+        if (splitCoord[1].length > 5)
+            return splitCoord[0] + '.' + splitCoord[1].slice(0, 5);
+
+        return coord;
     }
 }
 

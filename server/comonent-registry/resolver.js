@@ -1,9 +1,14 @@
 'use strict';
 
+
 const registry = require('./registry');
 
+const depTreeCache = {};
 
 module.exports = function componentResolver(top) {
+    if (depTreeCache[top])
+        return depTreeCache[top];
+
     let dependencies = [];
     if (typeof top !== 'string')
         return [];
@@ -33,5 +38,6 @@ module.exports = function componentResolver(top) {
     if (iconLinkIdx !== -1)
         dependencies.splice(iconLinkIdx, 1);
 
+    depTreeCache[top] = dependencies;
     return dependencies;
 };

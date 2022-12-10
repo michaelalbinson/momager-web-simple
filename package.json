@@ -8,7 +8,7 @@
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "cookie-parser": "^1.4.5",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-handlebars": "^4.0.0",
     "helmet": "^3.22.0",
     "minimist": ">=1.2.2",
